@@ -109,17 +109,19 @@ export default function UIKit() {
           />
       </div>
 
-      {/* Sidebar Toggle Button (Mobile & Desktop) */}
-      <div className="fixed top-4 left-4 z-[60]">
-         <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="bg-background/80 backdrop-blur-md border-border/50 shadow-sm hover:bg-background/90 rounded-full h-10 w-10"
-         >
-            {isSidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-         </Button>
-      </div>
+      {/* Sidebar Toggle Button (Visible when CLOSED) */}
+      {!isSidebarOpen && (
+        <div className="fixed top-4 left-4 z-[60]">
+           <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={() => setIsSidebarOpen(true)}
+              className="bg-background/80 backdrop-blur-md border-border/50 shadow-sm hover:bg-background/90 rounded-full h-10 w-10"
+           >
+              <Menu className="h-4 w-4" />
+           </Button>
+        </div>
+      )}
 
       {/* Sidebar */}
       <AnimatePresence mode="wait">
@@ -132,8 +134,8 @@ export default function UIKit() {
             className="w-64 fixed inset-y-0 left-0 z-50 border-r border-border/50 bg-sidebar/60 backdrop-blur-xl pt-14 lg:pt-0"
           >
             <div className="h-full flex flex-col">
-              <div className="h-14 flex items-center px-6 border-b border-sidebar-border/50">
-                <div className="flex items-center gap-2 font-bold text-lg tracking-tight pl-8 lg:pl-0">
+              <div className="h-14 flex items-center justify-between px-6 border-b border-sidebar-border/50">
+                <div className="flex items-center gap-2 font-bold text-lg tracking-tight">
                   <motion.div 
                     whileHover={{ rotate: 180 }}
                     transition={{ duration: 0.5 }}
@@ -143,6 +145,16 @@ export default function UIKit() {
                   </motion.div>
                   <span>Structura</span>
                 </div>
+                
+                {/* Close Button (Inside Sidebar when OPEN) */}
+                <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="h-8 w-8 -mr-2 hover:bg-sidebar-accent/50"
+                >
+                    <X className="h-4 w-4" />
+                </Button>
               </div>
               <ScrollArea className="flex-1 py-4">
                 <div className="px-4 space-y-6">
