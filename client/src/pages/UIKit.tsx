@@ -66,13 +66,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity, Eye, EyeOff, Timer } from "lucide-react";
+import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity, Eye, EyeOff, Timer, Menu, X } from "lucide-react";
 
 export default function UIKit() {
   const [showCard, setShowCard] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  // Mobile check (simplified)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
-    <div className="min-h-screen font-sans text-foreground flex bg-transparent selection:bg-primary/30">
+    <div className="min-h-screen font-sans text-foreground flex bg-transparent selection:bg-primary/30 relative overflow-x-hidden">
       {/* Background Image Layer */}
       <div 
         className="fixed inset-0 -z-50 opacity-30 dark:opacity-20 pointer-events-none mix-blend-overlay"
@@ -105,92 +109,120 @@ export default function UIKit() {
           />
       </div>
 
+      {/* Sidebar Toggle Button (Mobile & Desktop) */}
+      <div className="fixed top-4 left-4 z-[60]">
+         <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="bg-background/80 backdrop-blur-md border-border/50 shadow-sm hover:bg-background/90 rounded-full h-10 w-10"
+         >
+            {isSidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+         </Button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-64 fixed inset-y-0 left-0 z-50 border-r border-border/50 bg-sidebar/50 backdrop-blur-xl hidden lg:block">
-        <div className="h-full flex flex-col">
-          <div className="h-14 flex items-center px-6 border-b border-sidebar-border/50">
-            <div className="flex items-center gap-2 font-bold text-lg tracking-tight">
-              <motion.div 
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.5 }}
-                className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-primary-foreground shadow-lg shadow-indigo-500/20"
-              >
-                <Waves className="w-4 h-4" />
-              </motion.div>
-              <span>Structura</span>
-            </div>
-          </div>
-          <ScrollArea className="flex-1 py-4">
-            <div className="px-4 space-y-6">
-              <StaggerContainer staggerDelay={0.05}>
-                <StaggerItem>
-                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                        <Zap className="w-3 h-3" /> Motion
-                    </h4>
-                    <div className="space-y-1">
-                        <a href="#animations" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Showcase</a>
-                    </div>
-                </StaggerItem>
-                
-                <div className="h-4"></div>
-
-                <StaggerItem>
-                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                        <Layers className="w-3 h-3" /> Foundation
-                    </h4>
-                    <div className="space-y-1">
-                    <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
-                    <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
-                    </div>
-                </StaggerItem>
-                
-                <div className="h-4"></div>
-
-                <StaggerItem>
-                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                        <Component className="w-3 h-3" /> Components
-                    </h4>
-                    <div className="space-y-1">
-                    <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
-                    <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
-                    <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
-                    <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
-                    <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
-                    <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
-                    </div>
-                </StaggerItem>
-
-                <div className="h-4"></div>
-
-                <StaggerItem>
-                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                        <Layout className="w-3 h-3" /> Examples
-                    </h4>
-                    <div className="space-y-1">
-                        <a href="#examples" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Composed UI</a>
-                    </div>
-                </StaggerItem>
-              </StaggerContainer>
-            </div>
-          </ScrollArea>
-          <div className="p-4 border-t border-sidebar-border/50">
-             <div className="flex items-center gap-3 px-2">
-                <Avatar className="h-8 w-8 border border-border">
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>UI</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">Design Engineer</span>
-                  <span className="text-xs text-muted-foreground">v2.2.0</span>
+      <AnimatePresence mode="wait">
+        {isSidebarOpen && (
+          <motion.aside 
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="w-64 fixed inset-y-0 left-0 z-50 border-r border-border/50 bg-sidebar/60 backdrop-blur-xl pt-14 lg:pt-0"
+          >
+            <div className="h-full flex flex-col">
+              <div className="h-14 flex items-center px-6 border-b border-sidebar-border/50">
+                <div className="flex items-center gap-2 font-bold text-lg tracking-tight pl-8 lg:pl-0">
+                  <motion.div 
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-primary-foreground shadow-lg shadow-indigo-500/20"
+                  >
+                    <Waves className="w-4 h-4" />
+                  </motion.div>
+                  <span>Structura</span>
                 </div>
-             </div>
-          </div>
-        </div>
-      </aside>
+              </div>
+              <ScrollArea className="flex-1 py-4">
+                <div className="px-4 space-y-6">
+                  <StaggerContainer staggerDelay={0.05}>
+                    <StaggerItem>
+                        <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                            <Zap className="w-3 h-3" /> Motion
+                        </h4>
+                        <div className="space-y-1">
+                            <a href="#animations" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Showcase</a>
+                        </div>
+                    </StaggerItem>
+                    
+                    <div className="h-4"></div>
+
+                    <StaggerItem>
+                        <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                            <Layers className="w-3 h-3" /> Foundation
+                        </h4>
+                        <div className="space-y-1">
+                        <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
+                        <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
+                        </div>
+                    </StaggerItem>
+                    
+                    <div className="h-4"></div>
+
+                    <StaggerItem>
+                        <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                            <Component className="w-3 h-3" /> Components
+                        </h4>
+                        <div className="space-y-1">
+                        <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
+                        <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
+                        <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
+                        <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
+                        <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
+                        <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
+                        </div>
+                    </StaggerItem>
+
+                    <div className="h-4"></div>
+
+                    <StaggerItem>
+                        <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                            <Layout className="w-3 h-3" /> Examples
+                        </h4>
+                        <div className="space-y-1">
+                            <a href="#examples" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Composed UI</a>
+                        </div>
+                    </StaggerItem>
+                  </StaggerContainer>
+                </div>
+              </ScrollArea>
+              <div className="p-4 border-t border-sidebar-border/50">
+                 <div className="flex items-center gap-3 px-2">
+                    <Avatar className="h-8 w-8 border border-border">
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>UI</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">Design Engineer</span>
+                      <span className="text-xs text-muted-foreground">v2.3.0</span>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
 
       {/* Main Content */}
-      <main className="flex-1 lg:pl-64">
-        <div className="max-w-5xl mx-auto p-8 lg:p-12 space-y-16">
+      <motion.main 
+        className="flex-1"
+        animate={{ 
+            marginLeft: isSidebarOpen && (typeof window !== 'undefined' && window.innerWidth >= 1024) ? 256 : 0 
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div className="max-w-5xl mx-auto p-8 lg:p-12 space-y-16 pt-20 lg:pt-12">
           
           {/* Header */}
           <FadeIn className="flex flex-col gap-8">
@@ -767,7 +799,7 @@ export default function UIKit() {
           </section>
 
         </div>
-      </main>
+      </motion.main>
     </div>
   );
 }
