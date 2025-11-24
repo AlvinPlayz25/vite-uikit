@@ -7,7 +7,9 @@ import { PricingCard } from "@/components/ui-kit/PricingCard";
 import { LoginCard } from "@/components/ui-kit/LoginCard";
 import { GlassCard } from "@/components/ui-kit/GlassCard";
 import { GradientText } from "@/components/ui-kit/GradientText";
+import { FadeIn, ScaleIn, HoverLift, HoverGlow, StaggerContainer, StaggerItem, AnimateText } from "@/components/ui-kit/Motion";
 import abstractBg from '@assets/generated_images/abstract_gradient_mesh_background_with_noise_texture.png';
+import { motion } from "framer-motion";
 
 // Components
 import { Button } from "@/components/ui/button";
@@ -64,11 +66,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component } from "lucide-react";
+import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity } from "lucide-react";
 
 export default function UIKit() {
   return (
-    <div className="min-h-screen font-sans text-foreground flex bg-transparent">
+    <div className="min-h-screen font-sans text-foreground flex bg-transparent selection:bg-primary/30">
       {/* Background Image Layer */}
       <div 
         className="fixed inset-0 -z-50 opacity-30 dark:opacity-20 pointer-events-none mix-blend-overlay"
@@ -78,50 +80,95 @@ export default function UIKit() {
             backgroundPosition: 'center',
         }}
       />
+      
+      {/* Floating Orbs Animation */}
+      <div className="fixed inset-0 -z-40 overflow-hidden pointer-events-none">
+          <motion.div 
+            animate={{ 
+                x: [0, 100, 0],
+                y: [0, 50, 0],
+                scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-20 left-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            animate={{ 
+                x: [0, -50, 0],
+                y: [0, 100, 0],
+                scale: [1, 1.5, 1],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 2 }}
+            className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl"
+          />
+      </div>
 
       {/* Sidebar */}
       <aside className="w-64 fixed inset-y-0 left-0 z-50 border-r border-border/50 bg-sidebar/50 backdrop-blur-xl hidden lg:block">
         <div className="h-full flex flex-col">
           <div className="h-14 flex items-center px-6 border-b border-sidebar-border/50">
             <div className="flex items-center gap-2 font-bold text-lg tracking-tight">
-              <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-primary-foreground shadow-lg shadow-indigo-500/20">
+              <motion.div 
+                whileHover={{ rotate: 180 }}
+                transition={{ duration: 0.5 }}
+                className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-primary-foreground shadow-lg shadow-indigo-500/20"
+              >
                 <Waves className="w-4 h-4" />
-              </div>
+              </motion.div>
               <span>Structura</span>
             </div>
           </div>
           <ScrollArea className="flex-1 py-4">
             <div className="px-4 space-y-6">
-              <div>
-                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                    <Layers className="w-3 h-3" /> Foundation
-                </h4>
-                <div className="space-y-1">
-                  <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
-                  <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
-                </div>
-              </div>
-              <div>
-                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                    <Component className="w-3 h-3" /> Components
-                </h4>
-                <div className="space-y-1">
-                  <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
-                  <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
-                  <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
-                  <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
-                  <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
-                  <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
-                </div>
-              </div>
-              <div>
-                 <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                    <Layout className="w-3 h-3" /> Examples
-                 </h4>
-                 <div className="space-y-1">
-                    <a href="#examples" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Composed UI</a>
-                 </div>
-              </div>
+              <StaggerContainer staggerDelay={0.05}>
+                <StaggerItem>
+                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                        <Zap className="w-3 h-3" /> Motion
+                    </h4>
+                    <div className="space-y-1">
+                        <a href="#animations" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Showcase</a>
+                    </div>
+                </StaggerItem>
+                
+                <div className="h-4"></div>
+
+                <StaggerItem>
+                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                        <Layers className="w-3 h-3" /> Foundation
+                    </h4>
+                    <div className="space-y-1">
+                    <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
+                    <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
+                    </div>
+                </StaggerItem>
+                
+                <div className="h-4"></div>
+
+                <StaggerItem>
+                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                        <Component className="w-3 h-3" /> Components
+                    </h4>
+                    <div className="space-y-1">
+                    <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
+                    <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
+                    <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
+                    <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
+                    <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
+                    <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
+                    </div>
+                </StaggerItem>
+
+                <div className="h-4"></div>
+
+                <StaggerItem>
+                    <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                        <Layout className="w-3 h-3" /> Examples
+                    </h4>
+                    <div className="space-y-1">
+                        <a href="#examples" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Composed UI</a>
+                    </div>
+                </StaggerItem>
+              </StaggerContainer>
             </div>
           </ScrollArea>
           <div className="p-4 border-t border-sidebar-border/50">
@@ -132,7 +179,7 @@ export default function UIKit() {
                 </Avatar>
                 <div className="flex flex-col">
                   <span className="text-sm font-medium">Design Engineer</span>
-                  <span className="text-xs text-muted-foreground">v2.0.0</span>
+                  <span className="text-xs text-muted-foreground">v2.1.0</span>
                 </div>
              </div>
           </div>
@@ -144,29 +191,101 @@ export default function UIKit() {
         <div className="max-w-5xl mx-auto p-8 lg:p-12 space-y-16">
           
           {/* Header */}
-          <div className="flex flex-col gap-8">
+          <FadeIn className="flex flex-col gap-8">
             <div className="flex justify-end w-full">
                 <ModeToggle />
             </div>
             <HeroSection />
-          </div>
+          </FadeIn>
 
+          <Separator className="bg-border/50" />
+
+          {/* Animations Showcase */}
+          <section id="animations" className="scroll-mt-20">
+             <FadeIn>
+                <h2 className="text-3xl font-semibold mb-8 font-heading flex items-center gap-2">
+                    <GradientText>Motion & Animation</GradientText>
+                    <Sparkles className="h-5 w-5 text-indigo-400" />
+                </h2>
+                <p className="text-muted-foreground mb-8 max-w-2xl">
+                    A suite of motion primitives powered by Framer Motion. These components bring life to your UI with smooth, physics-based interactions.
+                </p>
+             </FadeIn>
+
+             <div className="grid gap-8">
+                <ComponentWrapper title="Hover Effects" description="Interactive states for cards and actionable elements.">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                        <HoverLift>
+                            <GlassCard className="h-32 flex items-center justify-center cursor-pointer bg-indigo-500/10 border-indigo-500/20">
+                                <span className="font-medium flex items-center gap-2"><Move className="w-4 h-4" /> Lift on Hover</span>
+                            </GlassCard>
+                        </HoverLift>
+                        
+                        <HoverGlow>
+                             <GlassCard className="h-32 flex items-center justify-center cursor-pointer bg-purple-500/10 border-purple-500/20">
+                                <span className="font-medium flex items-center gap-2"><Zap className="w-4 h-4" /> Glow on Hover</span>
+                            </GlassCard>
+                        </HoverGlow>
+
+                        <motion.div 
+                            whileHover={{ scale: 0.95, rotate: -2 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                        >
+                             <GlassCard className="h-32 flex items-center justify-center cursor-pointer bg-pink-500/10 border-pink-500/20">
+                                <span className="font-medium flex items-center gap-2"><Activity className="w-4 h-4" /> Shrink & Rotate</span>
+                            </GlassCard>
+                        </motion.div>
+                    </div>
+                </ComponentWrapper>
+
+                <ComponentWrapper title="Entrance Animations" description="Smooth entry transitions for content.">
+                    <div className="w-full space-y-8">
+                        <div className="space-y-2">
+                            <Label>Staggered List</Label>
+                            <StaggerContainer className="grid grid-cols-4 gap-4">
+                                {[1, 2, 3, 4].map((i) => (
+                                    <StaggerItem key={i}>
+                                        <div className="h-16 rounded-lg bg-accent/50 border border-border/50 flex items-center justify-center">
+                                            Item {i}
+                                        </div>
+                                    </StaggerItem>
+                                ))}
+                            </StaggerContainer>
+                        </div>
+                        
+                        <div className="space-y-2">
+                            <Label>Text Animation</Label>
+                            <div className="p-6 rounded-xl bg-background/50 border border-border/50">
+                                <AnimateText text="Typing effect with stagger..." className="text-xl font-medium font-heading" />
+                            </div>
+                        </div>
+                    </div>
+                </ComponentWrapper>
+             </div>
+          </section>
+          
           <Separator className="bg-border/50" />
           
           {/* Examples Section */}
           <section id="examples" className="scroll-mt-20">
-            <h2 className="text-3xl font-semibold mb-8 font-heading flex items-center gap-2">
-                <GradientText>Composed Examples</GradientText>
-            </h2>
+            <FadeIn>
+                <h2 className="text-3xl font-semibold mb-8 font-heading flex items-center gap-2">
+                    <GradientText>Composed Examples</GradientText>
+                </h2>
+            </FadeIn>
             <div className="grid lg:grid-cols-2 gap-8">
-                <div className="flex flex-col gap-4">
-                    <h3 className="text-lg font-medium text-muted-foreground">Login & Authentication</h3>
-                    <LoginCard />
-                </div>
-                <div className="flex flex-col gap-4">
-                    <h3 className="text-lg font-medium text-muted-foreground">Pricing & Features</h3>
-                    <PricingCard />
-                </div>
+                <ScaleIn delay={0.1}>
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-lg font-medium text-muted-foreground">Login & Authentication</h3>
+                        <LoginCard />
+                    </div>
+                </ScaleIn>
+                <ScaleIn delay={0.2}>
+                    <div className="flex flex-col gap-4">
+                        <h3 className="text-lg font-medium text-muted-foreground">Pricing & Features</h3>
+                        <PricingCard />
+                    </div>
+                </ScaleIn>
             </div>
           </section>
 
@@ -174,17 +293,19 @@ export default function UIKit() {
 
           {/* Typography Section */}
           <section id="typography" className="scroll-mt-20">
-            <h2 className="text-2xl font-semibold mb-6 font-heading">Typography</h2>
-            <div className="grid gap-8">
-              <div className="space-y-2">
+            <FadeIn>
+                <h2 className="text-2xl font-semibold mb-6 font-heading">Typography</h2>
+            </FadeIn>
+            <StaggerContainer className="grid gap-8">
+              <StaggerItem className="space-y-2">
                 <p className="text-sm text-muted-foreground font-mono">Display • Space Grotesk</p>
                 <GlassCard className="space-y-4">
                   <h1 className="text-4xl font-bold tracking-tight">The quick brown fox jumps over the lazy dog</h1>
                   <h2 className="text-3xl font-semibold tracking-tight">The quick brown fox jumps over the lazy dog</h2>
                   <h3 className="text-2xl font-medium tracking-tight">The quick brown fox jumps over the lazy dog</h3>
                 </GlassCard>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                  <p className="text-sm text-muted-foreground font-mono">Body • Inter</p>
                  <GlassCard>
                   <p className="leading-7">
@@ -192,53 +313,52 @@ export default function UIKit() {
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
                  </GlassCard>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerContainer>
           </section>
 
           {/* Colors Section */}
           <section id="colors" className="scroll-mt-20">
-            <h2 className="text-2xl font-semibold mb-6 font-heading">Color Palette</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="space-y-2">
+            <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Color Palette</h2></FadeIn>
+            <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-background border shadow-sm flex items-end p-3"><span className="text-xs font-mono">Background</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-foreground flex items-end p-3"><span className="text-xs font-mono text-background">Foreground</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-primary flex items-end p-3"><span className="text-xs font-mono text-primary-foreground">Primary</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-secondary flex items-end p-3"><span className="text-xs font-mono text-secondary-foreground">Secondary</span></div>
-              </div>
-               <div className="space-y-2">
+              </StaggerItem>
+               <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-muted flex items-end p-3"><span className="text-xs font-mono text-muted-foreground">Muted</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-accent flex items-end p-3"><span className="text-xs font-mono text-accent-foreground">Accent</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-destructive flex items-end p-3"><span className="text-xs font-mono text-destructive-foreground">Destructive</span></div>
-              </div>
-              <div className="space-y-2">
+              </StaggerItem>
+              <StaggerItem className="space-y-2">
                 <div className="h-24 rounded-xl bg-border flex items-end p-3"><span className="text-xs font-mono text-foreground">Border</span></div>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerContainer>
           </section>
 
           {/* Buttons Section */}
           <section id="buttons" className="scroll-mt-20">
-            <h2 className="text-2xl font-semibold mb-6 font-heading">Buttons</h2>
+            <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Buttons</h2></FadeIn>
             <div className="grid gap-6">
               <ComponentWrapper title="Variants" description="Standard button styles for different actions.">
                 <div className="flex flex-wrap gap-4 justify-center">
-                  <Button>Default</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="destructive">Destructive</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
-                  <Button variant="link">Link</Button>
+                    {['Default', 'Secondary', 'Destructive', 'Outline', 'Ghost', 'Link'].map((variant, i) => (
+                         <motion.div key={variant} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Button variant={variant.toLowerCase() as any}>{variant}</Button>
+                         </motion.div>
+                    ))}
                 </div>
               </ComponentWrapper>
               
@@ -266,17 +386,17 @@ export default function UIKit() {
 
           {/* Inputs Section */}
           <section id="inputs" className="scroll-mt-20">
-            <h2 className="text-2xl font-semibold mb-6 font-heading">Inputs & Forms</h2>
+            <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Inputs & Forms</h2></FadeIn>
             <div className="grid gap-6">
               <ComponentWrapper title="Text Fields" description="Common input types for text data.">
                 <div className="w-full max-w-sm space-y-4">
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="email">Email</Label>
-                    <Input type="email" id="email" placeholder="Email" className="bg-background/50" />
+                    <Input type="email" id="email" placeholder="Email" className="bg-background/50 transition-all focus:scale-[1.01]" />
                   </div>
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="password">Password</Label>
-                    <Input type="password" id="password" placeholder="Password" className="bg-background/50" />
+                    <Input type="password" id="password" placeholder="Password" className="bg-background/50 transition-all focus:scale-[1.01]" />
                   </div>
                 </div>
               </ComponentWrapper>
@@ -329,7 +449,7 @@ export default function UIKit() {
 
                   <div className="grid w-full gap-1.5">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea placeholder="Type your message here." id="message" className="bg-background/50" />
+                    <Textarea placeholder="Type your message here." id="message" className="bg-background/50 transition-all focus:scale-[1.01]" />
                   </div>
                 </div>
               </ComponentWrapper>
@@ -338,10 +458,10 @@ export default function UIKit() {
 
           {/* Cards Section */}
           <section id="cards" className="scroll-mt-20">
-            <h2 className="text-2xl font-semibold mb-6 font-heading">Cards & Display</h2>
+            <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Cards & Display</h2></FadeIn>
             <div className="grid gap-6">
               <ComponentWrapper title="Card Component" description="Container for related content and actions.">
-                 <Card className="w-[350px] bg-background/60 backdrop-blur-sm">
+                 <Card className="w-[350px] bg-background/60 backdrop-blur-sm transition-all hover:shadow-lg">
                   <CardHeader>
                     <CardTitle>Create project</CardTitle>
                     <CardDescription>Deploy your new project in one-click.</CardDescription>
@@ -370,50 +490,62 @@ export default function UIKit() {
                     <TabsTrigger value="password">Password</TabsTrigger>
                   </TabsList>
                   <TabsContent value="account">
-                    <Card className="bg-background/60 backdrop-blur-sm">
-                      <CardHeader>
-                        <CardTitle>Account</CardTitle>
-                        <CardDescription>
-                          Make changes to your account here. Click save when you're done.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-2">
-                        <div className="space-y-1">
-                          <Label htmlFor="name">Name</Label>
-                          <Input id="name" defaultValue="Pedro Duarte" className="bg-background/50" />
-                        </div>
-                        <div className="space-y-1">
-                          <Label htmlFor="username">Username</Label>
-                          <Input id="username" defaultValue="@peduarte" className="bg-background/50" />
-                        </div>
-                      </CardContent>
-                      <CardFooter>
-                        <Button>Save changes</Button>
-                      </CardFooter>
-                    </Card>
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Card className="bg-background/60 backdrop-blur-sm">
+                        <CardHeader>
+                            <CardTitle>Account</CardTitle>
+                            <CardDescription>
+                            Make changes to your account here. Click save when you're done.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                            <Label htmlFor="name">Name</Label>
+                            <Input id="name" defaultValue="Pedro Duarte" className="bg-background/50" />
+                            </div>
+                            <div className="space-y-1">
+                            <Label htmlFor="username">Username</Label>
+                            <Input id="username" defaultValue="@peduarte" className="bg-background/50" />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save changes</Button>
+                        </CardFooter>
+                        </Card>
+                    </motion.div>
                   </TabsContent>
                   <TabsContent value="password">
-                    <Card className="bg-background/60 backdrop-blur-sm">
-                      <CardHeader>
-                        <CardTitle>Password</CardTitle>
-                        <CardDescription>
-                          Change your password here. After saving, you'll be logged out.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-2">
-                        <div className="space-y-1">
-                          <Label htmlFor="current">Current password</Label>
-                          <Input id="current" type="password" className="bg-background/50" />
-                        </div>
-                        <div className="space-y-1">
-                          <Label htmlFor="new">New password</Label>
-                          <Input id="new" type="password" className="bg-background/50" />
-                        </div>
-                      </CardContent>
-                      <CardFooter>
-                        <Button>Save password</Button>
-                      </CardFooter>
-                    </Card>
+                     <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <Card className="bg-background/60 backdrop-blur-sm">
+                        <CardHeader>
+                            <CardTitle>Password</CardTitle>
+                            <CardDescription>
+                            Change your password here. After saving, you'll be logged out.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                            <Label htmlFor="current">Current password</Label>
+                            <Input id="current" type="password" className="bg-background/50" />
+                            </div>
+                            <div className="space-y-1">
+                            <Label htmlFor="new">New password</Label>
+                            <Input id="new" type="password" className="bg-background/50" />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save password</Button>
+                        </CardFooter>
+                        </Card>
+                    </motion.div>
                   </TabsContent>
                 </Tabs>
               </ComponentWrapper>
@@ -422,7 +554,7 @@ export default function UIKit() {
 
           {/* Data Section */}
           <section id="data" className="scroll-mt-20">
-             <h2 className="text-2xl font-semibold mb-6 font-heading">Data & Layout</h2>
+             <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Data & Layout</h2></FadeIn>
              <div className="grid gap-6">
                 <ComponentWrapper title="Accordion" description="Vertically stacked interactive headings.">
                    <Accordion type="single" collapsible className="w-full max-w-md">
@@ -461,25 +593,25 @@ export default function UIKit() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow className="hover:bg-muted/50 border-border/50">
+                      <TableRow className="hover:bg-muted/50 border-border/50 transition-colors">
                         <TableCell className="font-medium">INV-001</TableCell>
                         <TableCell>Paid</TableCell>
                         <TableCell>Credit Card</TableCell>
                         <TableCell className="text-right">$250.00</TableCell>
                       </TableRow>
-                      <TableRow className="hover:bg-muted/50 border-border/50">
+                      <TableRow className="hover:bg-muted/50 border-border/50 transition-colors">
                         <TableCell className="font-medium">INV-002</TableCell>
                         <TableCell>Pending</TableCell>
                         <TableCell>PayPal</TableCell>
                         <TableCell className="text-right">$120.00</TableCell>
                       </TableRow>
-                      <TableRow className="hover:bg-muted/50 border-border/50">
+                      <TableRow className="hover:bg-muted/50 border-border/50 transition-colors">
                         <TableCell className="font-medium">INV-003</TableCell>
                         <TableCell>Unpaid</TableCell>
                         <TableCell>Bank Transfer</TableCell>
                         <TableCell className="text-right">$350.00</TableCell>
                       </TableRow>
-                       <TableRow className="hover:bg-muted/50 border-border/50">
+                       <TableRow className="hover:bg-muted/50 border-border/50 transition-colors">
                         <TableCell className="font-medium">INV-004</TableCell>
                         <TableCell>Paid</TableCell>
                         <TableCell>Credit Card</TableCell>
@@ -493,7 +625,7 @@ export default function UIKit() {
 
           {/* Navigation Section */}
            <section id="navigation" className="scroll-mt-20">
-             <h2 className="text-2xl font-semibold mb-6 font-heading">Navigation</h2>
+             <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Navigation</h2></FadeIn>
              <div className="grid gap-6">
                 <ComponentWrapper title="Dropdown Menu" description="Displays a list of actions or options.">
                   <DropdownMenu>
@@ -537,7 +669,7 @@ export default function UIKit() {
 
           {/* Feedback Section */}
           <section id="feedback" className="scroll-mt-20 pb-20">
-             <h2 className="text-2xl font-semibold mb-6 font-heading">Feedback & Overlays</h2>
+             <FadeIn><h2 className="text-2xl font-semibold mb-6 font-heading">Feedback & Overlays</h2></FadeIn>
              <div className="grid gap-6">
                 <ComponentWrapper title="Alerts" description="Callout messages for user attention.">
                   <div className="w-full max-w-md space-y-4">
