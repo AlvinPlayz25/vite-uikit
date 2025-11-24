@@ -67,16 +67,28 @@ import {
 } from "@/components/ui/table";
 
 import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity, Eye, EyeOff, Timer, Menu, X } from "lucide-react";
+import { LoadingScreen } from "@/components/ui-kit/LoadingScreen";
 
 export default function UIKit() {
   const [showCard, setShowCard] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading and hide after 2 seconds
+  React.useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Mobile check (simplified)
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
     <div className="min-h-screen font-sans text-foreground flex bg-transparent selection:bg-primary/30 relative overflow-x-hidden">
+      {/* Loading Screen */}
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
       {/* Background Image Layer */}
       <div 
         className="fixed inset-0 -z-50 opacity-30 dark:opacity-20 pointer-events-none mix-blend-overlay"
