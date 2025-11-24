@@ -1,4 +1,4 @@
-import { motion, HTMLMotionProps, Variants } from "framer-motion";
+import { motion, HTMLMotionProps, Variants, AnimatePresence } from "framer-motion";
 import React from "react";
 
 interface MotionProps extends HTMLMotionProps<"div"> {
@@ -12,6 +12,19 @@ export const FadeIn = ({ children, delay = 0, duration = 0.5, className, ...prop
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration, delay, ease: "easeOut" }}
+    className={className}
+    {...props}
+  >
+    {children}
+  </motion.div>
+);
+
+export const FadeInOut = ({ children, delay = 0, duration = 0.3, className, ...props }: MotionProps) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.95 }}
+    transition={{ duration, delay, ease: "easeInOut" }}
     className={className}
     {...props}
   >
@@ -48,6 +61,17 @@ export const HoverGlow = ({ children, className, ...props }: HTMLMotionProps<"di
   <motion.div
     whileHover={{ boxShadow: "0 0 25px 5px rgba(99, 102, 241, 0.3)" }}
     transition={{ duration: 0.3 }}
+    className={className}
+    {...props}
+  >
+    {children}
+  </motion.div>
+);
+
+export const Pulse = ({ children, className, ...props }: HTMLMotionProps<"div">) => (
+  <motion.div
+    animate={{ opacity: [1, 0.5, 1] }}
+    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
     className={className}
     {...props}
   >
@@ -143,3 +167,5 @@ export const AnimateText = ({ text, className, delay = 0 }: { text: string, clas
     </motion.div>
   );
 };
+
+export { AnimatePresence };

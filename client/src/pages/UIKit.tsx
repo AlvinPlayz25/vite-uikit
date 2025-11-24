@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import { ComponentWrapper } from "@/components/ui-kit/ComponentWrapper";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -7,7 +7,7 @@ import { PricingCard } from "@/components/ui-kit/PricingCard";
 import { LoginCard } from "@/components/ui-kit/LoginCard";
 import { GlassCard } from "@/components/ui-kit/GlassCard";
 import { GradientText } from "@/components/ui-kit/GradientText";
-import { FadeIn, ScaleIn, HoverLift, HoverGlow, StaggerContainer, StaggerItem, AnimateText } from "@/components/ui-kit/Motion";
+import { FadeIn, FadeInOut, ScaleIn, HoverLift, HoverGlow, Pulse, StaggerContainer, StaggerItem, AnimateText, AnimatePresence } from "@/components/ui-kit/Motion";
 import abstractBg from '@assets/generated_images/abstract_gradient_mesh_background_with_noise_texture.png';
 import { motion } from "framer-motion";
 
@@ -66,9 +66,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity } from "lucide-react";
+import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component, Zap, Sparkles, Move, Activity, Eye, EyeOff, Timer } from "lucide-react";
 
 export default function UIKit() {
+  const [showCard, setShowCard] = useState(true);
+
   return (
     <div className="min-h-screen font-sans text-foreground flex bg-transparent selection:bg-primary/30">
       {/* Background Image Layer */}
@@ -179,7 +181,7 @@ export default function UIKit() {
                 </Avatar>
                 <div className="flex flex-col">
                   <span className="text-sm font-medium">Design Engineer</span>
-                  <span className="text-xs text-muted-foreground">v2.1.0</span>
+                  <span className="text-xs text-muted-foreground">v2.2.0</span>
                 </div>
              </div>
           </div>
@@ -213,6 +215,45 @@ export default function UIKit() {
              </FadeIn>
 
              <div className="grid gap-8">
+                <ComponentWrapper title="Interactive States" description="Transitions for mounting, unmounting, and visibility.">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <Label>Fade In/Out Toggle</Label>
+                                <Button variant="outline" size="sm" onClick={() => setShowCard(!showCard)}>
+                                    {showCard ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
+                                    {showCard ? "Hide" : "Show"}
+                                </Button>
+                            </div>
+                            <div className="h-40 flex items-center justify-center border border-dashed border-border/50 rounded-xl bg-background/20">
+                                <AnimatePresence mode="wait">
+                                    {showCard && (
+                                        <FadeInOut key="demo-card">
+                                            <GlassCard className="w-64 text-center bg-indigo-500/20 border-indigo-500/30">
+                                                <p className="font-medium text-indigo-200">I fade in and out smoothly!</p>
+                                            </GlassCard>
+                                        </FadeInOut>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        <div className="space-y-4">
+                            <Label>Continuous Pulse</Label>
+                            <div className="h-40 flex items-center justify-center border border-dashed border-border/50 rounded-xl bg-background/20">
+                                <Pulse>
+                                     <GlassCard className="w-64 text-center bg-emerald-500/20 border-emerald-500/30">
+                                        <div className="flex items-center justify-center gap-2 text-emerald-200">
+                                            <Timer className="w-4 h-4" />
+                                            <span className="font-medium">Live Status</span>
+                                        </div>
+                                    </GlassCard>
+                                </Pulse>
+                            </div>
+                        </div>
+                    </div>
+                </ComponentWrapper>
+
                 <ComponentWrapper title="Hover Effects" description="Interactive states for cards and actionable elements.">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
                         <HoverLift>
