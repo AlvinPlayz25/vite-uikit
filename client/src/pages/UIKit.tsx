@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "wouter";
 import { ComponentWrapper } from "@/components/ui-kit/ComponentWrapper";
 import { ModeToggle } from "@/components/mode-toggle";
+import { HeroSection } from "@/components/ui-kit/HeroSection";
+import { PricingCard } from "@/components/ui-kit/PricingCard";
+import { LoginCard } from "@/components/ui-kit/LoginCard";
+import { GlassCard } from "@/components/ui-kit/GlassCard";
+import { GradientText } from "@/components/ui-kit/GradientText";
+import abstractBg from '@assets/generated_images/abstract_gradient_mesh_background_with_noise_texture.png';
 
 // Components
 import { Button } from "@/components/ui/button";
@@ -58,17 +64,27 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users } from "lucide-react";
+import { Terminal, Waves, AlertCircle, Check, ChevronRight, Mail, Loader2, BellRing, MoreHorizontal, Plus, User, CreditCard, Settings, Keyboard, Users, Layers, Layout, Component } from "lucide-react";
 
 export default function UIKit() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground flex">
+    <div className="min-h-screen font-sans text-foreground flex bg-transparent">
+      {/* Background Image Layer */}
+      <div 
+        className="fixed inset-0 -z-50 opacity-30 dark:opacity-20 pointer-events-none mix-blend-overlay"
+        style={{
+            backgroundImage: `url(${abstractBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        }}
+      />
+
       {/* Sidebar */}
-      <aside className="w-64 fixed inset-y-0 left-0 z-50 border-r bg-sidebar hidden lg:block">
+      <aside className="w-64 fixed inset-y-0 left-0 z-50 border-r border-border/50 bg-sidebar/50 backdrop-blur-xl hidden lg:block">
         <div className="h-full flex flex-col">
-          <div className="h-14 flex items-center px-6 border-b border-sidebar-border">
+          <div className="h-14 flex items-center px-6 border-b border-sidebar-border/50">
             <div className="flex items-center gap-2 font-bold text-lg tracking-tight">
-              <div className="w-6 h-6 bg-primary rounded-md flex items-center justify-center text-primary-foreground">
+              <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-primary-foreground shadow-lg shadow-indigo-500/20">
                 <Waves className="w-4 h-4" />
               </div>
               <span>Structura</span>
@@ -77,26 +93,38 @@ export default function UIKit() {
           <ScrollArea className="flex-1 py-4">
             <div className="px-4 space-y-6">
               <div>
-                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Foundation</h4>
+                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                    <Layers className="w-3 h-3" /> Foundation
+                </h4>
                 <div className="space-y-1">
-                  <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
-                  <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
+                  <a href="#typography" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Typography</a>
+                  <a href="#colors" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Colors</a>
                 </div>
               </div>
               <div>
-                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Components</h4>
+                <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                    <Component className="w-3 h-3" /> Components
+                </h4>
                 <div className="space-y-1">
-                  <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
-                  <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
-                  <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
-                  <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
-                  <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
-                  <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
+                  <a href="#buttons" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Buttons</a>
+                  <a href="#inputs" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Inputs & Forms</a>
+                  <a href="#cards" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Cards & Display</a>
+                  <a href="#data" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Data & Layout</a>
+                  <a href="#navigation" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Navigation</a>
+                  <a href="#feedback" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Feedback</a>
                 </div>
+              </div>
+              <div>
+                 <h4 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                    <Layout className="w-3 h-3" /> Examples
+                 </h4>
+                 <div className="space-y-1">
+                    <a href="#examples" className="block px-2 py-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground rounded-md transition-colors">Composed UI</a>
+                 </div>
               </div>
             </div>
           </ScrollArea>
-          <div className="p-4 border-t border-sidebar-border">
+          <div className="p-4 border-t border-sidebar-border/50">
              <div className="flex items-center gap-3 px-2">
                 <Avatar className="h-8 w-8 border border-border">
                   <AvatarImage src="https://github.com/shadcn.png" />
@@ -104,7 +132,7 @@ export default function UIKit() {
                 </Avatar>
                 <div className="flex flex-col">
                   <span className="text-sm font-medium">Design Engineer</span>
-                  <span className="text-xs text-muted-foreground">v1.0.0</span>
+                  <span className="text-xs text-muted-foreground">v2.0.0</span>
                 </div>
              </div>
           </div>
@@ -113,25 +141,36 @@ export default function UIKit() {
 
       {/* Main Content */}
       <main className="flex-1 lg:pl-64">
-        <div className="max-w-4xl mx-auto p-8 lg:p-12 space-y-16">
+        <div className="max-w-5xl mx-auto p-8 lg:p-12 space-y-16">
           
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold font-heading tracking-tight">Structura UI Kit</h1>
-              <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                A comprehensive design system focused on utility, precision, and industrial aesthetics. 
-                Built with Tailwind CSS and Radix UI primitives.
-              </p>
-              <div className="flex gap-4 pt-4">
-                <Button>Get Started</Button>
-                <Button variant="outline">Documentation</Button>
-              </div>
+          <div className="flex flex-col gap-8">
+            <div className="flex justify-end w-full">
+                <ModeToggle />
             </div>
-            <ModeToggle />
+            <HeroSection />
           </div>
 
-          <Separator />
+          <Separator className="bg-border/50" />
+          
+          {/* Examples Section */}
+          <section id="examples" className="scroll-mt-20">
+            <h2 className="text-3xl font-semibold mb-8 font-heading flex items-center gap-2">
+                <GradientText>Composed Examples</GradientText>
+            </h2>
+            <div className="grid lg:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-4">
+                    <h3 className="text-lg font-medium text-muted-foreground">Login & Authentication</h3>
+                    <LoginCard />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <h3 className="text-lg font-medium text-muted-foreground">Pricing & Features</h3>
+                    <PricingCard />
+                </div>
+            </div>
+          </section>
+
+          <Separator className="bg-border/50" />
 
           {/* Typography Section */}
           <section id="typography" className="scroll-mt-20">
@@ -139,20 +178,20 @@ export default function UIKit() {
             <div className="grid gap-8">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground font-mono">Display • Space Grotesk</p>
-                <div className="space-y-4 p-6 border rounded-lg bg-card">
+                <GlassCard className="space-y-4">
                   <h1 className="text-4xl font-bold tracking-tight">The quick brown fox jumps over the lazy dog</h1>
                   <h2 className="text-3xl font-semibold tracking-tight">The quick brown fox jumps over the lazy dog</h2>
                   <h3 className="text-2xl font-medium tracking-tight">The quick brown fox jumps over the lazy dog</h3>
-                </div>
+                </GlassCard>
               </div>
               <div className="space-y-2">
                  <p className="text-sm text-muted-foreground font-mono">Body • Inter</p>
-                 <div className="p-6 border rounded-lg bg-card">
+                 <GlassCard>
                   <p className="leading-7">
                     Loreum ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
-                 </div>
+                 </GlassCard>
               </div>
             </div>
           </section>
@@ -162,28 +201,28 @@ export default function UIKit() {
             <h2 className="text-2xl font-semibold mb-6 font-heading">Color Palette</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-background border shadow-sm flex items-end p-2"><span className="text-xs font-mono">Background</span></div>
+                <div className="h-24 rounded-xl bg-background border shadow-sm flex items-end p-3"><span className="text-xs font-mono">Background</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-foreground flex items-end p-2"><span className="text-xs font-mono text-background">Foreground</span></div>
+                <div className="h-24 rounded-xl bg-foreground flex items-end p-3"><span className="text-xs font-mono text-background">Foreground</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-primary flex items-end p-2"><span className="text-xs font-mono text-primary-foreground">Primary</span></div>
+                <div className="h-24 rounded-xl bg-primary flex items-end p-3"><span className="text-xs font-mono text-primary-foreground">Primary</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-secondary flex items-end p-2"><span className="text-xs font-mono text-secondary-foreground">Secondary</span></div>
+                <div className="h-24 rounded-xl bg-secondary flex items-end p-3"><span className="text-xs font-mono text-secondary-foreground">Secondary</span></div>
               </div>
                <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-muted flex items-end p-2"><span className="text-xs font-mono text-muted-foreground">Muted</span></div>
+                <div className="h-24 rounded-xl bg-muted flex items-end p-3"><span className="text-xs font-mono text-muted-foreground">Muted</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-accent flex items-end p-2"><span className="text-xs font-mono text-accent-foreground">Accent</span></div>
+                <div className="h-24 rounded-xl bg-accent flex items-end p-3"><span className="text-xs font-mono text-accent-foreground">Accent</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-destructive flex items-end p-2"><span className="text-xs font-mono text-destructive-foreground">Destructive</span></div>
+                <div className="h-24 rounded-xl bg-destructive flex items-end p-3"><span className="text-xs font-mono text-destructive-foreground">Destructive</span></div>
               </div>
               <div className="space-y-2">
-                <div className="h-24 rounded-lg bg-border flex items-end p-2"><span className="text-xs font-mono text-foreground">Border</span></div>
+                <div className="h-24 rounded-xl bg-border flex items-end p-3"><span className="text-xs font-mono text-foreground">Border</span></div>
               </div>
             </div>
           </section>
@@ -233,11 +272,11 @@ export default function UIKit() {
                 <div className="w-full max-w-sm space-y-4">
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="email">Email</Label>
-                    <Input type="email" id="email" placeholder="Email" />
+                    <Input type="email" id="email" placeholder="Email" className="bg-background/50" />
                   </div>
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="password">Password</Label>
-                    <Input type="password" id="password" placeholder="Password" />
+                    <Input type="password" id="password" placeholder="Password" className="bg-background/50" />
                   </div>
                 </div>
               </ComponentWrapper>
@@ -270,7 +309,7 @@ export default function UIKit() {
                <ComponentWrapper title="Advanced Inputs" description="Selects, sliders, and textareas.">
                 <div className="w-full max-w-sm space-y-6">
                    <Select>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-background/50">
                       <SelectValue placeholder="Select a timezone" />
                     </SelectTrigger>
                     <SelectContent>
@@ -290,7 +329,7 @@ export default function UIKit() {
 
                   <div className="grid w-full gap-1.5">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea placeholder="Type your message here." id="message" />
+                    <Textarea placeholder="Type your message here." id="message" className="bg-background/50" />
                   </div>
                 </div>
               </ComponentWrapper>
@@ -302,7 +341,7 @@ export default function UIKit() {
             <h2 className="text-2xl font-semibold mb-6 font-heading">Cards & Display</h2>
             <div className="grid gap-6">
               <ComponentWrapper title="Card Component" description="Container for related content and actions.">
-                 <Card className="w-[350px]">
+                 <Card className="w-[350px] bg-background/60 backdrop-blur-sm">
                   <CardHeader>
                     <CardTitle>Create project</CardTitle>
                     <CardDescription>Deploy your new project in one-click.</CardDescription>
@@ -312,7 +351,7 @@ export default function UIKit() {
                       <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
                           <Label htmlFor="name">Name</Label>
-                          <Input id="name" placeholder="Name of your project" />
+                          <Input id="name" placeholder="Name of your project" className="bg-background/50" />
                         </div>
                       </div>
                     </form>
@@ -331,7 +370,7 @@ export default function UIKit() {
                     <TabsTrigger value="password">Password</TabsTrigger>
                   </TabsList>
                   <TabsContent value="account">
-                    <Card>
+                    <Card className="bg-background/60 backdrop-blur-sm">
                       <CardHeader>
                         <CardTitle>Account</CardTitle>
                         <CardDescription>
@@ -341,11 +380,11 @@ export default function UIKit() {
                       <CardContent className="space-y-2">
                         <div className="space-y-1">
                           <Label htmlFor="name">Name</Label>
-                          <Input id="name" defaultValue="Pedro Duarte" />
+                          <Input id="name" defaultValue="Pedro Duarte" className="bg-background/50" />
                         </div>
                         <div className="space-y-1">
                           <Label htmlFor="username">Username</Label>
-                          <Input id="username" defaultValue="@peduarte" />
+                          <Input id="username" defaultValue="@peduarte" className="bg-background/50" />
                         </div>
                       </CardContent>
                       <CardFooter>
@@ -354,7 +393,7 @@ export default function UIKit() {
                     </Card>
                   </TabsContent>
                   <TabsContent value="password">
-                    <Card>
+                    <Card className="bg-background/60 backdrop-blur-sm">
                       <CardHeader>
                         <CardTitle>Password</CardTitle>
                         <CardDescription>
@@ -364,11 +403,11 @@ export default function UIKit() {
                       <CardContent className="space-y-2">
                         <div className="space-y-1">
                           <Label htmlFor="current">Current password</Label>
-                          <Input id="current" type="password" />
+                          <Input id="current" type="password" className="bg-background/50" />
                         </div>
                         <div className="space-y-1">
                           <Label htmlFor="new">New password</Label>
-                          <Input id="new" type="password" />
+                          <Input id="new" type="password" className="bg-background/50" />
                         </div>
                       </CardContent>
                       <CardFooter>
@@ -387,20 +426,20 @@ export default function UIKit() {
              <div className="grid gap-6">
                 <ComponentWrapper title="Accordion" description="Vertically stacked interactive headings.">
                    <Accordion type="single" collapsible className="w-full max-w-md">
-                    <AccordionItem value="item-1">
+                    <AccordionItem value="item-1" className="border-b border-border/50">
                       <AccordionTrigger>Is it accessible?</AccordionTrigger>
                       <AccordionContent>
                         Yes. It adheres to the WAI-ARIA design pattern.
                       </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="item-2">
+                    <AccordionItem value="item-2" className="border-b border-border/50">
                       <AccordionTrigger>Is it styled?</AccordionTrigger>
                       <AccordionContent>
                         Yes. It comes with default styles that matches the other
                         components' aesthetic.
                       </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="item-3">
+                    <AccordionItem value="item-3" className="border-b border-border/50">
                       <AccordionTrigger>Is it animated?</AccordionTrigger>
                       <AccordionContent>
                         Yes. It's animated by default, but you can disable it if you
@@ -414,7 +453,7 @@ export default function UIKit() {
                   <Table>
                     <TableCaption>A list of your recent invoices.</TableCaption>
                     <TableHeader>
-                      <TableRow>
+                      <TableRow className="hover:bg-muted/50 border-border/50">
                         <TableHead className="w-[100px]">Invoice</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Method</TableHead>
@@ -422,25 +461,25 @@ export default function UIKit() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
+                      <TableRow className="hover:bg-muted/50 border-border/50">
                         <TableCell className="font-medium">INV-001</TableCell>
                         <TableCell>Paid</TableCell>
                         <TableCell>Credit Card</TableCell>
                         <TableCell className="text-right">$250.00</TableCell>
                       </TableRow>
-                      <TableRow>
+                      <TableRow className="hover:bg-muted/50 border-border/50">
                         <TableCell className="font-medium">INV-002</TableCell>
                         <TableCell>Pending</TableCell>
                         <TableCell>PayPal</TableCell>
                         <TableCell className="text-right">$120.00</TableCell>
                       </TableRow>
-                      <TableRow>
+                      <TableRow className="hover:bg-muted/50 border-border/50">
                         <TableCell className="font-medium">INV-003</TableCell>
                         <TableCell>Unpaid</TableCell>
                         <TableCell>Bank Transfer</TableCell>
                         <TableCell className="text-right">$350.00</TableCell>
                       </TableRow>
-                       <TableRow>
+                       <TableRow className="hover:bg-muted/50 border-border/50">
                         <TableCell className="font-medium">INV-004</TableCell>
                         <TableCell>Paid</TableCell>
                         <TableCell>Credit Card</TableCell>
@@ -461,9 +500,9 @@ export default function UIKit() {
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline">Open Menu</Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56">
+                    <DropdownMenuContent className="w-56 bg-background/80 backdrop-blur-xl border-border/50">
                       <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+                      <DropdownMenuSeparator className="bg-border/50" />
                       <DropdownMenuItem>
                         <User className="mr-2 h-4 w-4" />
                         <span>Profile</span>
@@ -480,12 +519,12 @@ export default function UIKit() {
                         <Keyboard className="mr-2 h-4 w-4" />
                         <span>Keyboard shortcuts</span>
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator />
+                      <DropdownMenuSeparator className="bg-border/50" />
                       <DropdownMenuItem>
                         <Users className="mr-2 h-4 w-4" />
                         <span>Team</span>
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator />
+                      <DropdownMenuSeparator className="bg-border/50" />
                       <DropdownMenuItem>
                         <Plus className="mr-2 h-4 w-4" />
                         <span>New Team</span>
@@ -502,14 +541,14 @@ export default function UIKit() {
              <div className="grid gap-6">
                 <ComponentWrapper title="Alerts" description="Callout messages for user attention.">
                   <div className="w-full max-w-md space-y-4">
-                     <Alert>
+                     <Alert className="bg-background/60 backdrop-blur-sm">
                       <Terminal className="h-4 w-4" />
                       <AlertTitle>Heads up!</AlertTitle>
                       <AlertDescription>
                         You can add components to your app using the cli.
                       </AlertDescription>
                     </Alert>
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="bg-destructive/5 border-destructive/20">
                       <AlertCircle className="h-4 w-4" />
                       <AlertTitle>Error</AlertTitle>
                       <AlertDescription>
@@ -524,7 +563,7 @@ export default function UIKit() {
                     <DialogTrigger asChild>
                       <Button variant="outline">Edit Profile</Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-[425px] bg-background/90 backdrop-blur-xl border-border/50">
                       <DialogHeader>
                         <DialogTitle>Edit profile</DialogTitle>
                         <DialogDescription>
@@ -536,13 +575,13 @@ export default function UIKit() {
                           <Label htmlFor="name" className="text-right">
                             Name
                           </Label>
-                          <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                          <Input id="name" value="Pedro Duarte" className="col-span-3 bg-background/50" />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
                           <Label htmlFor="username" className="text-right">
                             Username
                           </Label>
-                          <Input id="username" value="@peduarte" className="col-span-3" />
+                          <Input id="username" value="@peduarte" className="col-span-3 bg-background/50" />
                         </div>
                       </div>
                       <DialogFooter>
